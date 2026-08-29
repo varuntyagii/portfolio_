@@ -9,7 +9,9 @@ const app = express();
 
 app.set("trust proxy", true);
 
-app.use(cors());
+app.use(cors({
+  origin: process.env.FRONTEND_URL
+}));
 app.use(express.json());
 const contactQueue = require("./queue.js");
 // const resend = new Resend(process.env.RESEND_API_KEY);
