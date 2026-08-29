@@ -14,10 +14,12 @@ app.use(express.json());
 const contactQueue = require("./queue.js");
 // const resend = new Resend(process.env.RESEND_API_KEY);
 
-const redis = new Redis({
-  host: process.env.REDIS_HOST,
-  port: process.env.REDIS_PORT,
-});
+const redis = new Redis(
+  process.env.REDIS_URL || {
+    host: process.env.REDIS_HOST || "localhost",
+    port: Number(process.env.REDIS_PORT) || 6379,
+  }
+);
 
 redis.on("connect", () => {
   console.log("Redis Connected 🚀");

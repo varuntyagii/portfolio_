@@ -4,10 +4,12 @@ const { Worker } = require("bullmq");
 const sendAdminMail = require("./sendAdminMail");
 const sendUserMail = require("./mailSend");
 
-const connection = {
-  host: process.env.REDIS_HOST || "localhost",
-  port: Number(process.env.REDIS_PORT) || 6379,
-};
+const connection = process.env.REDIS_URL
+  ? { url: process.env.REDIS_URL }
+  : {
+      host: process.env.REDIS_HOST || "localhost",
+      port: Number(process.env.REDIS_PORT) || 6379,
+    };
 
 const worker = new Worker(
   "contact-email",

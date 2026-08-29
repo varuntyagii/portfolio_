@@ -9,7 +9,7 @@ async function sendAdminMail(data) {
     from: process.env.FROM_EMAIL
       ? `Varun Tyagi <${process.env.FROM_EMAIL}>`
       : "Varun Tyagi <hello@varuntyagi.qzz.io>",
-    to: process.env.ADMIN_EMAIL || "vityagi98@gmail.com",
+    to: process.env.ADMIN_EMAIL,
     replyTo: data.email,
 
     subject: `New message from ${data.name}`,
