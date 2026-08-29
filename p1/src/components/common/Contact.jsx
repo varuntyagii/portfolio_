@@ -232,46 +232,51 @@ export default function Contact() {
 
     setStatus("");
     setLoading(true);
+try {
+  console.log("API URL:", import.meta.env.VITE_API_URL);
 
-    try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/contact`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name,
-          email,
-          message,
-          token,
-        }),
-      });
+  const response = await fetch(
+    `${import.meta.env.VITE_API_URL}/api/contact`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name,
+        email,
+        message,
+        token,
+      }),
+    }
+  );
 
-      const data = await response.json();
+  const data = await response.json();
 
-      if (response.status === 429) {
-        setStatus("Too many requests. Try again after 1 minute.");
-        return;
-      }
+  console.log("STATUS:", response.status);
+  console.log("DATA:", data);
 
-      if (!response.ok) {
-        setStatus(data.message || "Something went wrong.");
-        return;
-      }
+  if (response.status === 429) {
+    setStatus("Too many requests. Try again after 1 minute.");
+    return;
+  }
 
-      setStatus("✨ Message sent successfully! I'll get back to you soon.");
-      setName("");
-      setEmail("");
-      setMessage("");
-      setWidgetKey((prev) => prev + 1);
-      setToken("");
+  if (!response.ok) {
+    setStatus(data.message || "Something went wrong.");
+    return;
+  }
 
-      if (turnstileRef.current) {
-        turnstileRef.current.reset();
-      }
-    } catch (err) {
-      setStatus("Server is unavailable. Please try again later.");
-    } finally {
+  setStatus("✨ Message sent successfully! I'll get back to you soon.");
+  setName("");
+  setEmail("");
+  setMessage("");
+  setWidgetKey((prev) => prev + 1);
+  setToken("");
+
+} catch (err) {
+  console.error("CONTACT ERROR:", err);
+  setStatus("Server is unavailable. Please try again later.");
+} finally {
       setLoading(false);
     }
   };
