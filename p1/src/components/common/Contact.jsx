@@ -233,7 +233,6 @@ export default function Contact() {
     setStatus("");
     setLoading(true);
 try {
-  console.log("API URL:", import.meta.env.VITE_API_URL);
 
   const response = await fetch(
     `${import.meta.env.VITE_API_URL}/api/contact`,
@@ -253,8 +252,6 @@ try {
 
   const data = await response.json();
 
-  console.log("STATUS:", response.status);
-  console.log("DATA:", data);
 
   if (response.status === 429) {
     setStatus("Too many requests. Try again after 1 minute.");
