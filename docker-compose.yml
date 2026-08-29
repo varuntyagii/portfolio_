@@ -1,0 +1,57 @@
+services:
+
+  frontend:
+    build: ./p1
+    image: portfolio-frontend
+    container_name: portfolio-frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./p1:/app
+      - /app/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    command: npm run dev -- --host 0.0.0.0
+
+  backend:
+    build: ./backend
+    image: portfolio-backend
+    container_name: portfolio-backend
+    env_file:
+      - ./backend/.env
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    ports:
+      - "5001:5000"
+    command: npm run dev
+    depends_on:
+      - redis
+    restart: unless-stopped
+
+  worker:
+    build: ./backend
+    image: portfolio-backend
+    container_name: portfolio-worker
+    env_file:
+      - ./backend/.env
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    command: node worker.js
+    depends_on:
+      - redis
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    container_name: portfolio-redis
+    ports:
+      - "6379:6379"
+    restart: unless-stopped

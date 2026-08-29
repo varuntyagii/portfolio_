@@ -1,0 +1,12 @@
+const { Queue } = require("bullmq");
+
+const connection = {
+    host: process.env.REDIS_HOST || "localhost",
+    port: Number(process.env.REDIS_PORT) || 6379,
+};
+
+const contactQueue = new Queue("contact-email", {
+    connection,
+});
+
+module.exports = contactQueue;
