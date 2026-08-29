@@ -739,18 +739,17 @@ export default function Contact() {
 
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-5 mb-10">
 
-                <Turnstile
-                  className="cursor-pointer
-      cursor-target"
-                  key={widgetKey}
-                  siteKey="0x4AAAAAADyGNhrhMpa5CuPJ"
-                  onSuccess={(t) => setToken(t)}
-                  ref={turnstileRef}
-                  options={{
-                    theme: "dark",
-                    size: "flexible",
-                  }}
-                />
+                          <Turnstile
+                          className="cursor-pointer cursor-target"
+                          key={widgetKey}
+                          siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY}
+                          onSuccess={(t) => setToken(t)}
+                          ref={turnstileRef}
+                          options={{
+                            theme: "dark",
+                            size: "flexible",
+                          }}
+                        />
 
                 <button
                   disabled={loading}
