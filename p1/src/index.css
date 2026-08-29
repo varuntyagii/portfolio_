@@ -222,17 +222,17 @@
   z-index: 1000; /* Ensures menu stays above content */
 }
 
-/* .container {
+.container {
   overflow-y: auto;
   scrollbar-width: none;
-} */
+}
 .container::-webkit-scrollbar {
   display: none;
 }
 
 
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 1px;
     /* background: black; */
   
 }
@@ -244,6 +244,7 @@
 ::-webkit-scrollbar-thumb {
   background: black;
   transition: 0.3s;
+  width: 2px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
