@@ -443,3 +443,11 @@ body{
   display: inline-block;
   will-change: transform;
 }
+
+html {
+  scroll-behavior: auto;
+}
+
+body {
+  margin: 0;
+}
