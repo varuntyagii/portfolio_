@@ -31,6 +31,7 @@ jobs:
         working-directory: ./p1
         run: |
           vercel deploy --prod \
+            --yes \
             --token=${{ secrets.VERCEL_TOKEN }} \
             --scope=${{ secrets.VERCEL_ORG_ID }}
 
