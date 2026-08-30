@@ -256,7 +256,7 @@ async function sendAdminMail(data) {
           <td style="padding:20px 24px; text-align:center;">
             <a href="https://varuntyagi.vercel.app/" target="_blank" style="font-size:12px;color:#6b7280;text-decoration:none;font-weight:600;">Portfolio</a>
             <span style="color:#d1d5db;">&nbsp;|&nbsp;</span>
-            <a href="mailto:hello@varuntyagi.qzz.io" style="font-size:12px;color:#6b7280;text-decoration:none;font-weight:600;">Contact</a>
+            <a href="mailto:hello@varuntyagi0099@gmail.com" style="font-size:12px;color:#6b7280;text-decoration:none;font-weight:600;">Contact</a>
           </td>
         </tr>
 
