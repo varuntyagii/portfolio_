@@ -7,18 +7,22 @@ on:
       - completed
     branches:
       - main
+
   workflow_dispatch:
 
 jobs:
   deploy:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    if: >
+      github.event_name == 'workflow_dispatch' ||
+      github.event.workflow_run.conclusion == 'success'
+
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.workflow_run.head_sha }}
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -27,6 +31,13 @@ jobs:
 
       - name: Install Vercel CLI
         run: npm install -g vercel
+
+      - name: Link Vercel project
+        run: |
+          vercel link \
+            --yes \
+            --project=p1 \
+            --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Deploy frontend to Vercel
         run: |
