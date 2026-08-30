@@ -1,5 +1,5 @@
-import React, { useContext, useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
+  import React, { useContext, useEffect, useRef } from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Lenis from "lenis";
 
 import Home from "./pages/Home";
@@ -19,14 +19,22 @@ import { NavHoverContext } from "./context/MenuContext";
 import NotFound from "./components/common/NotFound";
 
 const App = () => {
-
   const { navHovered } = useContext(NavHoverContext);
 
+  const lenisRef = useRef(null);
+
+  const location = useLocation();
+
+  // ==============================
+  // LENIS
+  // ==============================
   useEffect(() => {
     const lenis = new Lenis({
       smoothWheel: true,
       lerp: 0.1,
     });
+
+    lenisRef.current = lenis;
 
     function raf(time) {
       lenis.raf(time);
@@ -37,8 +45,24 @@ const App = () => {
 
     return () => {
       lenis.destroy();
+      lenisRef.current = null;
     };
   }, []);
+
+  // ==============================
+  // SCROLL TO TOP ON ROUTE CHANGE
+  // ==============================
+  useEffect(() => {
+    // Normal browser scroll
+    window.scrollTo(0, 0);
+
+    // Lenis scroll
+    if (lenisRef.current) {
+      lenisRef.current.scrollTo(0, {
+        immediate: true,
+      });
+    }
+  }, [location.pathname]);
 
   return (
     <div className="overflow-x-clip">
@@ -55,20 +79,46 @@ const App = () => {
       )}
 
       <Navbar />
+
       <FullScreenNav />
+
       <Music />
 
       <Routes>
         <Route path="*" element={<NotFound />} />
+
         <Route path="/" element={<Home />} />
+
         <Route path="/about" element={<About />} />
+
         <Route path="/projects" element={<Projects />} />
+
         <Route path="/aboutme" element={<Aboutme />} />
-        <Route path="/projects/:id" element={<ProjectDetail />} />
-        <Route path="/loading" element={<LoadingPage />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/privacy-policy" element={<Privacy />} />
-        <Route path="/terms" element={<TermsOfService />} />
+
+        <Route
+          path="/projects/:id"
+          element={<ProjectDetail />}
+        />
+
+        <Route
+          path="/loading"
+          element={<LoadingPage />}
+        />
+
+        <Route
+          path="/contact"
+          element={<Contact />}
+        />
+
+        <Route
+          path="/privacy-policy"
+          element={<Privacy />}
+        />
+
+        <Route
+          path="/terms"
+          element={<TermsOfService />}
+        />
       </Routes>
 
     </div>

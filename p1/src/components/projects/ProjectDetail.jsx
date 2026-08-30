@@ -11,9 +11,12 @@ gsap.registerPlugin(ScrollTrigger);
 const ProjectDetail = () => {
   const { id } = useParams();
   
-  const project = projectImages
-    .flatMap(item => [item.project1, item.project2])
-    .find(item => item.id === id);
+const project = projectImages
+  .flatMap((item) => [
+    item.project1,
+    item.project2,
+  ])
+  .find((item) => item?.id === id);
 
   const { setHoveredTitle } = useContext(TitleContext);
   const { setHoveredYear } = useContext(YearContext);

@@ -24,7 +24,7 @@ export const projectImages = [
       id: "ecommerce-platform",
       title: "E-Commerce Platform",
       year: "Dec 2025",
-      image: "https://res.cloudinary.com/dgxnwlg0w/image/upload/c_crop,g_north_west,h_806,w_1441,x_230,y_90/ar_16:9,c_auto/Project1photo_h5qcnc.png",
+      image: "https://res.cloudinary.com/dgxnwlg0w/image/upload/v1788071760/a0cb4088-bc9c-4a0f-b921-2711063a8687.png",
       description: "Production-grade MERN e-commerce application with Firebase Auth, JWT, Cloudinary CDN image uploads, and a full admin dashboard for real-time product, order, and user management. Integrated Razorpay, Stripe, COD payment systems with webhook-based order updates. Features a voice assistant via Web Speech API for enhanced user experience.",
       techStack: ["React.js", "Node.js", "MongoDB", "Firebase", "JWT", "Razorpay", "Stripe", "Cloudinary"],
       features: [
@@ -43,7 +43,27 @@ export const projectImages = [
   },
  
   {
-    project1: {
+     project1: {
+      id: "portfolio",
+      title: "Personal Portfolio",
+      year: "Mar 2025",
+      image: "https://res.cloudinary.com/dgxnwlg0w/image/upload/v1787642146/portf_vk41ht.png",
+      description: "Responsive, SEO-optimized portfolio built with React.js, Tailwind CSS, and Framer Motion animations. Features an EmailJS contact form and achieved a 90+ Lighthouse performance score. Showcases projects, skills, and professional experience with a modern, clean design.",
+      techStack: ["React.js", "Tailwind CSS", "Framer Motion", "EmailJS", "GSAP", "Vercel"],
+      features: [
+        "SEO Optimized",
+        "Framer Motion Animations",
+        "EmailJS Contact Form",
+        "Responsive Design",
+        "90+ Lighthouse Score",
+        "Dark/Light Mode",
+        "Project Showcase",
+        "Downloadable Resume"
+      ],
+      github: "https://github.com/varuntyagii/Portfolio",
+      live: "https://portfolio-seven-xi-62.vercel.app/"
+    },
+    project2: {
       id: "ai-mock-interview",
       title: "AI Mock Interview",
       year: "Apr 2026",
@@ -63,29 +83,30 @@ export const projectImages = [
       github: "https://github.com/varuntyagii/ai-mock-interview",
       live: "https://ai-mock-interview.vercel.app"
     },
-    project2: {
-      id: "portfolio",
-      title: "Personal Portfolio",
-      year: "Mar 2025",
-      image: "https://res.cloudinary.com/dgxnwlg0w/image/upload/c_crop,g_north_west,h_806,w_1441,x_230,y_90/ar_16:9,c_auto/Project1photo_h5qcnc.png",
-      description: "Responsive, SEO-optimized portfolio built with React.js, Tailwind CSS, and Framer Motion animations. Features an EmailJS contact form and achieved a 90+ Lighthouse performance score. Showcases projects, skills, and professional experience with a modern, clean design.",
-      techStack: ["React.js", "Tailwind CSS", "Framer Motion", "EmailJS", "GSAP", "Vercel"],
-      features: [
-        "SEO Optimized",
-        "Framer Motion Animations",
-        "EmailJS Contact Form",
-        "Responsive Design",
-        "90+ Lighthouse Score",
-        "Dark/Light Mode",
-        "Project Showcase",
-        "Downloadable Resume"
-      ],
-      github: "https://github.com/varuntyagii/Portfolio",
-      live: "https://portfolio-seven-xi-62.vercel.app/"
-    }
+   
   },
   {
     project1: {
+      id: "reverts",
+      title: "Reverts",
+      year: "Jun 2026",
+      image: "https://res.cloudinary.com/dgxnwlg0w/image/upload/c_crop,g_north_west,h_806,w_1441,x_230,y_90/ar_16:9,c_auto/Project1photo_h5qcnc.png",
+      description: "Collaborative code review and version control tool enabling teams to review code, suggest changes, and track revisions with integrated chat and notification system. Built with real-time collaboration features, user authentication, and comprehensive project management capabilities.",
+      techStack: ["React.js", "Node.js", "PostgreSQL", "Socket.io", "Tailwind CSS", "JWT", "Redis"],
+      features: [
+        "Code Review",
+        "Version Control",
+        "Real-time Chat",
+        "Notifications",
+        "Project Management",
+        "Team Collaboration",
+        "Code Diff Viewer",
+        "Pull Requests"
+      ],
+      github: "https://github.com/varuntyagii/reverts",
+      live: "https://reverts.vercel.app"
+    },
+    project2: {
       id: "reverts",
       title: "Reverts",
       year: "Jun 2026",

@@ -65,17 +65,18 @@ const Navbar = () => {
         <img
           src={navColor === "white" ? logowhite : logoblack}
           alt="Varun Logo"
-          className="
-                  relative z-[100] block
-                  w-[180px]
-                  sm:w-[220px]
-                  md:w-[240px]
-                  p-1
-                  md:mt-2
-                  cursor-pointer
-                  cursor-target
-                  ml-3
-                  "
+              className="
+              relative z-[100] block
+              w-[120px]
+              sm:w-[180px]
+              md:w-[240px]
+              p-1
+              md:mt-2
+              mt-4
+              cursor-pointer
+              cursor-target
+              ml-3
+            "
           onDragStart={(e) => e.preventDefault()}
           // onMouseEnter={() => setNavHovered(true)}
           // onMouseLeave={() => setNavHovered(false)}
@@ -208,7 +209,7 @@ const Navbar = () => {
             className="block"
           >
             <div
-              className="relative md:h-13 h-13 w-[25vw] md:w-[16vw] overflow-hidden cursor-pointer group bg-[#D3D3D3]"
+              className="relative md:h-13 h-13 w-[20vw] md:w-[16vw] overflow-hidden cursor-pointer group bg-[#D3D3D3]"
               onMouseEnter={() => {
                 setResumeHover(true);
                 setNavHovered(true);
@@ -225,7 +226,7 @@ const Navbar = () => {
 
               <div className="relative z-10 flex items-center justify-center h-full">
                 <span
-                  className={`font-[font7] text-[5vw] md:text-[1.5vw] transition-colors duration-300 ${resumeHover ? "text-[#D3D3D3]" : "text-[#C87F7A]"
+                  className={`font-[font7] text-[4vw] md:text-[1.5vw] transition-colors duration-300 ${resumeHover ? "text-[#D3D3D3]" : "text-[#C87F7A]"
                     }`}
                 >
                   Resume
@@ -240,7 +241,7 @@ const Navbar = () => {
             onMouseEnter={() => { setHovered(true); setMenuHover(true); setNavHovered(true); }}
             onMouseLeave={() => { setHovered(false); setMenuHover(false); setNavHovered(false); }}
             onClick={() => { setNavHovered(true); setMenuOpen(true); }}
-            className="relative h-13 w-[45vw] md:w-[16vw] bg-[#000016] overflow-hidden cursor-pointer"
+            className="relative h-13 w-[35vw] md:w-[16vw] bg-[#000016] overflow-hidden cursor-pointer"
           >
             <div
               className={`absolute top-0 left-0 w-full bg-[#D3FD50] transition-all duration-300 ${menuHover ? "h-full" : "h-0"

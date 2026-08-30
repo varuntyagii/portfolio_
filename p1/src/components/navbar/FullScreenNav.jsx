@@ -385,7 +385,7 @@ const FullScreenNav = () => {
               isHome={true}
             >
               <h1 className="font-[font5] md:text-[7vw] text-[14vw] uppercase text-center tracking-tight leading-none">
-                Home
+                Home 🕸️
               </h1>
             </HoverMenuItem>
 
@@ -407,7 +407,7 @@ const FullScreenNav = () => {
               ]}
             >
               <h1 className="font-[font5] md:text-[7vw] text-[14vw] uppercase text-center tracking-tight leading-none">
-                Projects
+               🕸️ Projects
               </h1>
             </HoverMenuItem>
 
@@ -425,7 +425,7 @@ const FullScreenNav = () => {
               isAbout={true}
             >
               <h1 className="font-[font5] md:text-[7vw] text-[14vw] uppercase text-center tracking-tight leading-none">
-                about me
+                about 🕸️
               </h1>
             </HoverMenuItem>
 
@@ -443,7 +443,7 @@ const FullScreenNav = () => {
               speed={7}
             >
               <h1 className="font-[font5] md:text-[7vw] text-[14vw] uppercase text-center tracking-tight leading-none">
-                Contact
+              🕸️ Contact 
               </h1>
             </HoverMenuItem>
 

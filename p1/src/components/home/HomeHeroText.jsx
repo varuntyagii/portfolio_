@@ -24,7 +24,7 @@ const HomeHeroText = () => {
   return (
     <div className="    pt-40 md:pt-[60px] text-center">
       <p className="heading1 font-[font9] text-[4vw] uppercase sm:text-[1vw] text-white  ">
-        Hello, I'm Varun TYAGI 
+        Hello, I'm Varun TYAGI 🕸️
       </p>
 
       <h1 className="heading1 font-[font2] text-[10vw] uppercase leading-[12vw] text-white mix-blend-difference">
