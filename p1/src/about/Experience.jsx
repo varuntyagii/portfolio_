@@ -2,7 +2,7 @@ import React from 'react';
 import TextType from './TextType';
 
 const experiences = [
-    
+
     {
         id: 1,
         title: "OpenAI Codex Hackathon",
@@ -14,7 +14,7 @@ const experiences = [
         tags: ["OpenAI", "Codex", "Hackathon", "AI"],
         bgColor: "bg-[#F1EDE3]",
 
-     },
+    },
     {
         id: 2,
         title: "Anudip Foundation",
@@ -25,7 +25,7 @@ const experiences = [
         tags: ["Java", "JDBC", "SQL", "MySQL", "MongoDB"],
         bgColor: "bg-[#DFD0B2]",
     },
-   
+
     {
         id: 3,
         title: "Freelance Web Developer",
@@ -34,7 +34,7 @@ const experiences = [
         description: "Designed, developed, and deployed a full-stack fashion retail website using React.js, Node.js, Express.js, and MongoDB. Built a responsive user interface, product showcase features, and customer inquiry functionality. Implemented Cloudflare CDN for performance optimization and Helmet.js for enhanced security.",
         img: 'https://res.cloudinary.com/dgxnwlg0w/image/upload/v1786977614/ChatGPT_Image_Aug_17_2026_08_09_56_PM_awlzz4.png',
         tags: ["React.js", "Node.js", "Express.js", "MongoDB", "Cloudflare"],
-          bgColor: "bg-[#DCE8E8]",
+        bgColor: "bg-[#DCE8E8]",
     },
     {
         id: 4,
@@ -153,14 +153,14 @@ const Experience = () => {
                                 {exp.period}
                             </span>
                         </div>
-                        <div className="min-h-[180px]">
+                        <div className="h-[240px] sm:h-[210px] md:h-[220px] lg:h-[240px] overflow-hidden">
                             <TextType
                                 as="p"
                                 text={exp.description}
                                 typingSpeed={14}
                                 loop={true}
                                 showCursor={true}
-                                className="text-base sm:text-lg md:text-xl text-gray-700 leading-relaxed mb-4"
+                                className="text-base sm:text-lg md:text-xl text-gray-700 leading-relaxed"
                             />
                         </div>
                         <div className="flex flex-wrap gap-2">

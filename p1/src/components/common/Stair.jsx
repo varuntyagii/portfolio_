@@ -83,11 +83,11 @@ const Stair = (props) => {
       <div ref={stairRef} className='h-screen w-full fixed z-20 top-0'>
 
         <div className='h-full w-full flex'>
-          <div className='stair h-full w-1/5 bg-[#000016]'></div>
-          <div className='stair h-full w-1/5 bg-[#000016]'></div>
-          <div className='stair h-full w-1/5 bg-[#000016]'></div>
-          <div className='stair h-full w-1/5 bg-[#000016]'></div>
-          <div className='stair h-full w-1/5 bg-[#000016]'></div>
+          <div className='stair flex-1 -mr-[1px] bg-[#000016]'></div>
+          <div className='stair flex-1 -mr-[1px] bg-[#000016]'></div>
+          <div className='stair flex-1 -mr-[1px] bg-[#000016]'></div>
+          <div className='stair flex-1 -mr-[1px] bg-[#000016]'></div>
+          <div className='stair flex-1 -mr-[1px] bg-[#000016]'></div>
         </div>
 
       </div>
