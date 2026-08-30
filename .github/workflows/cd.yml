@@ -16,16 +16,28 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
 
       - name: Install Vercel CLI
         run: npm install -g vercel
 
+      - name: Link Vercel project
+        working-directory: ./p1
+        run: |
+          vercel link --yes \
+            --project tyagivarun \
+            --scope varuntyagiis-projects \
+            --token=${{ secrets.VERCEL_TOKEN }}
+
       - name: Deploy frontend to Vercel
         working-directory: ./p1
         run: vercel --prod --token=${{ secrets.VERCEL_TOKEN }}
-        env:
-          VERCEL_ORG_ID: ${{ secrets.VERCEL_USER_ID }}
-          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 
       - name: Deploy backend to Render
         run: curl -X POST "${{ secrets.RENDER_DEPLOY_HOOK }}"
