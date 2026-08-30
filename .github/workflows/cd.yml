@@ -34,8 +34,7 @@ jobs:
         run: |
           vercel deploy --prod \
             --yes \
-            --token=${{ secrets.VERCEL_TOKEN }} \
-            --scope=${{ secrets.VERCEL_ORG_ID }}
+            --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Deploy backend to Render
         run: curl -X POST "${{ secrets.RENDER_DEPLOY_HOOK }}"
