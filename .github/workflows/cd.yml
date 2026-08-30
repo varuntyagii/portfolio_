@@ -7,7 +7,6 @@ on:
       - completed
     branches:
       - main
-
   workflow_dispatch:
 
 jobs:
@@ -30,8 +29,8 @@ jobs:
         run: npm install -g vercel
 
       - name: Deploy frontend to Vercel
-        working-directory: ./p1
         run: |
+          cd p1
           vercel deploy --prod \
             --yes \
             --token=${{ secrets.VERCEL_TOKEN }}
