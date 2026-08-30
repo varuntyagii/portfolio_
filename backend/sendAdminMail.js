@@ -80,7 +80,7 @@ async function sendAdminMail(data) {
               padding: 24px 32px;
               box-sizing: border-box;
             ">
-              <a href="https://varuntyagi.qzz.io" target="_blank">
+              <a href="https://varuntyagi.vercel.app/" target="_blank">
                 <img
                   src="https://res.cloudinary.com/dgxnwlg0w/image/upload/v1787041389/logo-black_cigzlo.png"
                   alt="Varun Tyagi"
@@ -254,7 +254,7 @@ async function sendAdminMail(data) {
         <!-- FOOTER LINKS -->
         <tr>
           <td style="padding:20px 24px; text-align:center;">
-            <a href="https://varuntyagi.qzz.io" target="_blank" style="font-size:12px;color:#6b7280;text-decoration:none;font-weight:600;">Portfolio</a>
+            <a href="https://varuntyagi.vercel.app/" target="_blank" style="font-size:12px;color:#6b7280;text-decoration:none;font-weight:600;">Portfolio</a>
             <span style="color:#d1d5db;">&nbsp;|&nbsp;</span>
             <a href="mailto:hello@varuntyagi.qzz.io" style="font-size:12px;color:#6b7280;text-decoration:none;font-weight:600;">Contact</a>
           </td>
