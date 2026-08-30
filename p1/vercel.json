@@ -3,6 +3,7 @@
   "installCommand": "npm install --include=dev",
   "framework": "vite",
   "outputDirectory": "dist",
+  "rootDirectory": ".",
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
   ]
