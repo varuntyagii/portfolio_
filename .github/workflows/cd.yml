@@ -30,7 +30,6 @@ jobs:
 
       - name: Deploy frontend to Vercel
         run: |
-          cd p1
           vercel deploy --prod \
             --yes \
             --token=${{ secrets.VERCEL_TOKEN }}
