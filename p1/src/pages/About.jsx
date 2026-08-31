@@ -21,7 +21,7 @@ const About = () => {
   const imageArray = [
     "https://res.cloudinary.com/dgxnwlg0w/image/upload/v1781112270/Screenshot_20250328_205809_sarq5p.jpg",
     "https://res.cloudinary.com/dgxnwlg0w/image/upload/v1781103443/Snapchat-1962545898_f70ra6.png",
-    "https://res.cloudinary.com/dgxnwlg0w/image/upload/v1781105434/Gemini_Generated_Image_gedrkagedrkagedr_vxzefn.png",
+    "https://res.cloudinary.com/dgxnwlg0w/image/upload/v1788162643/Varunphoto_ptluuq.png",
     "https://res.cloudinary.com/dgxnwlg0w/image/upload/v1781112029/Snapchat-1497228895_hghtym.jpg",
     "https://res.cloudinary.com/dgxnwlg0w/image/upload/v1781112034/Screenshot_20250702_183738_kyhsap.jpg",
     "https://res.cloudinary.com/dgxnwlg0w/image/upload/v1781112035/Screenshot_20240630_203059_abj8rp.jpg",
