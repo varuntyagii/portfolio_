@@ -38,7 +38,7 @@ useGSAP(() => {
   </div>
 
   {/* Bottom Right GSAP stairs */} 
-  <div className="absolute bottom-20 md:bottom-2  right-2">
+  <div className="absolute bottom-25 md:bottom-2  right-2">
     <div className="h-20 w-20 overflow-hidden flex px-3.5">
       <div className="stair w-1/4 h-full bg-white"></div>
       <div className="stair w-1/4 h-full bg-white"></div>
@@ -46,7 +46,7 @@ useGSAP(() => {
       <div className="stair w-1/4 h-full bg-white"></div>
     </div>
   </div>
-  <div className="absolute text-7xl bottom-20 md:bottom-2 text-white left-2">
+  <div className="absolute text-7xl bottom-25 md:bottom-2 text-white left-2">
     <CountUp
       from={0}
       to={100}
