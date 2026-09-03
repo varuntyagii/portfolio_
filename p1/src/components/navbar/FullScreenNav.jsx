@@ -1,3 +1,4 @@
+
 import React, { useContext, useRef, useState, useEffect } from 'react'
 import Clock from '../home/Clock'
 import { useGSAP } from '@gsap/react';
@@ -17,6 +18,7 @@ import {
 } from "react-icons/fa";
 import { FaXTwitter } from 'react-icons/fa6';
 import { FlipLink } from '../common/FlipLink';
+
 
 // Hover Effect Component - Direction based
 const HoverMenuItem = ({
@@ -45,13 +47,16 @@ const HoverMenuItem = ({
   const findClosestEdge = (mouseX, mouseY, width, height) => {
     const topEdgeDist = (mouseX - width / 2) ** 2 + mouseY ** 2;
     const bottomEdgeDist = (mouseX - width / 2) ** 2 + (mouseY - height) ** 2;
+
     return topEdgeDist < bottomEdgeDist ? 'top' : 'bottom';
   };
+
 
   const aboutImages = [
     "https://res.cloudinary.com/dgxnwlg0w/image/upload/v1781514957/Gemini_Generated_Image_v9u7yiv9u7yiv9u7_loqv1q.png",
     "https://res.cloudinary.com/dgxnwlg0w/image/upload/v1781103443/Snapchat-1962545898_f70ra6.png"
   ]
+
 
   useEffect(() => {
     const calculateRepetitions = () => {
@@ -59,35 +64,48 @@ const HoverMenuItem = ({
         setRepetitions(4);
         return;
       }
+
       const marqueeContentEl = marqueeInnerRef.current.querySelector('.marquee-part');
+
       if (!marqueeContentEl) {
         setRepetitions(4);
         return;
       }
+
       const contentWidth = marqueeContentEl.offsetWidth;
+
       if (!contentWidth || contentWidth === 0) {
         setRepetitions(4);
         return;
       }
+
       const viewportWidth = window.innerWidth || 1024;
       const needed = Math.ceil(viewportWidth / contentWidth) + 2;
+
       setRepetitions(Math.max(4, needed));
     };
 
     const timer = setTimeout(calculateRepetitions, 100);
+
     window.addEventListener('resize', calculateRepetitions);
+
     return () => {
       clearTimeout(timer);
       window.removeEventListener('resize', calculateRepetitions);
     };
   }, [marqueeContent]);
 
+
   useEffect(() => {
     const setupMarquee = () => {
       if (!marqueeInnerRef.current) return;
+
       const marqueeContentEl = marqueeInnerRef.current.querySelector('.marquee-part');
+
       if (!marqueeContentEl) return;
+
       const contentWidth = marqueeContentEl.offsetWidth;
+
       if (!contentWidth || contentWidth === 0) return;
 
       if (animationRef.current) {
@@ -95,6 +113,7 @@ const HoverMenuItem = ({
       }
 
       let duration = speed;
+
       if (isResume) duration = speed / 2;
       if (isContact) duration = speed / 1.5;
       if (isHome) duration = speed / 1.5;
@@ -109,38 +128,93 @@ const HoverMenuItem = ({
     };
 
     const timer = setTimeout(setupMarquee, 150);
+
     return () => {
       clearTimeout(timer);
+
       if (animationRef.current) {
         animationRef.current.kill();
       }
     };
-  }, [marqueeContent, repetitions, isResume, isContact, isHome, speed, isAbout]);
+  }, [
+    marqueeContent,
+    repetitions,
+    isResume,
+    isContact,
+    isHome,
+    speed,
+    isAbout
+  ]);
+
 
   const handleMouseEnter = ev => {
     if (!itemRef.current || !marqueeRef.current || !marqueeInnerRef.current) return;
+
     const rect = itemRef.current.getBoundingClientRect();
-    const edge = findClosestEdge(ev.clientX - rect.left, ev.clientY - rect.top, rect.width, rect.height);
+
+    const edge = findClosestEdge(
+      ev.clientX - rect.left,
+      ev.clientY - rect.top,
+      rect.width,
+      rect.height
+    );
 
     gsap
       .timeline({ defaults: animationDefaults })
-      .set(marqueeRef.current, { y: edge === 'top' ? '-101%' : '101%' }, 0)
-      .set(marqueeInnerRef.current, { y: edge === 'top' ? '101%' : '-101%' }, 0)
-      .to([marqueeRef.current, marqueeInnerRef.current], { y: '0%' }, 0)
-      .to(textRef.current, { opacity: 0, duration: 0.3 }, 0);
+      .set(
+        marqueeRef.current,
+        { y: edge === 'top' ? '-101%' : '101%' },
+        0
+      )
+      .set(
+        marqueeInnerRef.current,
+        { y: edge === 'top' ? '101%' : '-101%' },
+        0
+      )
+      .to(
+        [marqueeRef.current, marqueeInnerRef.current],
+        { y: '0%' },
+        0
+      )
+      .to(
+        textRef.current,
+        { opacity: 0, duration: 0.3 },
+        0
+      );
   };
+
 
   const handleMouseLeave = ev => {
     if (!itemRef.current || !marqueeRef.current || !marqueeInnerRef.current) return;
+
     const rect = itemRef.current.getBoundingClientRect();
-    const edge = findClosestEdge(ev.clientX - rect.left, ev.clientY - rect.top, rect.width, rect.height);
+
+    const edge = findClosestEdge(
+      ev.clientX - rect.left,
+      ev.clientY - rect.top,
+      rect.width,
+      rect.height
+    );
 
     gsap
       .timeline({ defaults: animationDefaults })
-      .to(marqueeRef.current, { y: edge === 'top' ? '-101%' : '101%' }, 0)
-      .to(marqueeInnerRef.current, { y: edge === 'top' ? '101%' : '-101%' }, 0)
-      .to(textRef.current, { opacity: 1, duration: 0.3 }, 0);
+      .to(
+        marqueeRef.current,
+        { y: edge === 'top' ? '-101%' : '101%' },
+        0
+      )
+      .to(
+        marqueeInnerRef.current,
+        { y: edge === 'top' ? '101%' : '-101%' },
+        0
+      )
+      .to(
+        textRef.current,
+        { opacity: 1, duration: 0.3 },
+        0
+      );
   };
+
 
   return (
     <div
@@ -159,45 +233,126 @@ const HoverMenuItem = ({
         ref={marqueeRef}
         style={{ backgroundColor: bgColor }}
       >
-        <div className="h-full w-fit flex items-center moveX3" ref={marqueeInnerRef}>
-          {repetitions > 0 && [...Array(repetitions)].map((_, idx) => (
-            <div className="marquee-part flex items-center flex-shrink-0 h-full" key={idx} style={{ color: textColor }}>
-              {isHome ? (
-                <div className="flex items-center whitespace-nowrap gap-4 px-4">
-                  <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight font-bold">Home</span>
-                  <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight font-bold">⌂</span>
-                  <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight font-bold">Home</span>
-                  <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight font-bold">⌂</span>
-                  <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight font-bold">Home</span>
-                  <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight font-bold">⌂</span>
-                  <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight font-bold">Home</span>
-                  <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight font-bold">⌂</span>
-                  <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight font-bold">Home</span>
-                  <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight font-bold">⌂</span>
-                  <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight font-bold">Home</span>
-                  <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight font-bold">⌂</span>
-                  <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight font-bold">Home</span>
-                  <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight font-bold">⌂</span>
-                  <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight font-bold">Home</span>
-                  <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight font-bold">⌂</span>
-                  <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight font-bold">Home</span>
-                  <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight font-bold">⌂</span>
-                  <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight font-bold">Home</span>
-                  <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight font-bold">⌂</span>
-                  <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight font-bold">Home</span>
-                  <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight font-bold">⌂</span>
-                  <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight font-bold">Home</span>
-                  <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight font-bold">⌂</span>
-                  <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight font-bold">Home</span>
-                  <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight font-bold">⌂</span>
+        <div
+          className="h-full w-fit flex items-center moveX3"
+          ref={marqueeInnerRef}
+        >
+          {repetitions > 0 &&
+            [...Array(repetitions)].map((_, idx) => (
+              <div
+                className="marquee-part flex items-center flex-shrink-0 h-full"
+                key={idx}
+                style={{ color: textColor }}
+              >
 
-                </div>
-              )
-                : isAbout ? (
-                  // About - With diamond ◈ and images
+                {isHome ? (
                   <div className="flex items-center whitespace-nowrap gap-4 px-4">
+
+                    <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight font-bold">
+                      Home
+                    </span>
+
+                    <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight font-bold">
+                      ⌂
+                    </span>
+
+                    <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight font-bold">
+                      Home
+                    </span>
+
+                    <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight font-bold">
+                      ⌂
+                    </span>
+
+                    <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight font-bold">
+                      Home
+                    </span>
+
+                    <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight font-bold">
+                      ⌂
+                    </span>
+
+                    <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight font-bold">
+                      Home
+                    </span>
+
+                    <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight font-bold">
+                      ⌂
+                    </span>
+
+                    <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight font-bold">
+                      Home
+                    </span>
+
+                    <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight font-bold">
+                      ⌂
+                    </span>
+
+                    <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight font-bold">
+                      Home
+                    </span>
+
+                    <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight font-bold">
+                      ⌂
+                    </span>
+
+                    <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight font-bold">
+                      Home
+                    </span>
+
+                    <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight font-bold">
+                      ⌂
+                    </span>
+
+                    <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight font-bold">
+                      Home
+                    </span>
+
+                    <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight font-bold">
+                      ⌂
+                    </span>
+
+                    <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight font-bold">
+                      Home
+                    </span>
+
+                    <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight font-bold">
+                      ⌂
+                    </span>
+
+                    <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight font-bold">
+                      Home
+                    </span>
+
+                    <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight font-bold">
+                      ⌂
+                    </span>
+
+                    <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight font-bold">
+                      Home
+                    </span>
+
+                    <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight font-bold">
+                      ⌂
+                    </span>
+
+                    <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight font-bold">
+                      Home
+                    </span>
+
+                    <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight font-bold">
+                      ⌂
+                    </span>
+
+                  </div>
+
+                ) : isAbout ? (
+
+                  <div className="flex items-center whitespace-nowrap gap-4 px-4">
+
                     {Array.from({ length: 8 }).map((_, idx) => (
                       <React.Fragment key={idx}>
+
                         <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight font-bold">
                           ◈
                         </span>
@@ -212,139 +367,281 @@ const HoverMenuItem = ({
                             backgroundImage: `url(${aboutImages[idx % 2]})`,
                           }}
                         />
+
                       </React.Fragment>
                     ))}
+
                   </div>
+
                 ) : isContact ? (
+
                   <div className="flex items-center whitespace-nowrap gap-6 px-4">
+
                     <CiMail className="shrink-0 text-[8vw] md:text-[5vw]" />
-                    <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight leading-none">varun.tyagi.dev@gmail.com</span>
+
+                    <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight leading-none">
+                      varun.tyagi.dev@gmail.com
+                    </span>
+
                     <IoIosCall className="shrink-0 text-[8vw] md:text-[5vw]" />
-                    <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight leading-none">+91 6397011309</span>
+
+                    <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight leading-none">
+                      +91 6397011309
+                    </span>
+
                     <LiaHeart className="shrink-0 text-[8vw] md:text-[5vw]" />
-                    <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight leading-none">Let's Connect</span>
+
+                    <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight leading-none">
+                      Let's Connect
+                    </span>
+
                     <CiMail className="shrink-0 text-[8vw] md:text-[5vw]" />
-                    <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight leading-none">varun.tyagi.dev@gmail.com</span>
+
+                    <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight leading-none">
+                      varun.tyagi.dev@gmail.com
+                    </span>
+
                     <IoIosCall className="shrink-0 text-[8vw] md:text-[5vw]" />
-                    <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight leading-none">+91 6397011309</span>
+
+                    <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight leading-none">
+                      +91 6397011309
+                    </span>
+
                     <LiaHeart className="shrink-0 text-[8vw] md:text-[5vw]" />
-                    <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight leading-none">Let's Connect</span>
+
+                    <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight leading-none">
+                      Let's Connect
+                    </span>
+
                   </div>
+
                 ) : isResume ? (
+
                   <div className="flex items-center whitespace-nowrap gap-8 px-4">
-                    <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight font-bold">↗ View Resume</span>
-                    <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight font-bold">⬇ Download Resume</span>
-                    <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight font-bold">↗ View Resume</span>
-                    <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight font-bold">⬇ Download Resume</span>
-                    <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight font-bold">↗ View Resume</span>
-                    <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight font-bold">⬇ Download Resume</span>
+
+                    <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight font-bold">
+                      ↗ View Resume
+                    </span>
+
+                    <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight font-bold">
+                      ⬇ Download Resume
+                    </span>
+
+                    <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight font-bold">
+                      ↗ View Resume
+                    </span>
+
+                    <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight font-bold">
+                      ⬇ Download Resume
+                    </span>
+
+                    <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight font-bold">
+                      ↗ View Resume
+                    </span>
+
+                    <span className="font-[font5] text-[14vw] md:text-[7vw] uppercase tracking-tight font-bold">
+                      ⬇ Download Resume
+                    </span>
+
                   </div>
+
                 ) : (
-                  // Projects - With ❊ icons
+
                   <>
                     {marqueeContent &&
                       marqueeContent.split('❊').map((text, index) => {
+
                         if (!text.trim()) return null;
 
                         const image = images[index % 2];
 
                         return (
-                          <div key={index} className="flex items-center whitespace-nowrap gap-4">
+                          <div
+                            key={index}
+                            className="flex items-center whitespace-nowrap gap-4"
+                          >
+
                             <span className="whitespace-nowrap uppercase font-[font5] text-[14vw] md:text-[7vw] leading-none tracking-tight px-[1vw]">
                               ❊{text.trim()}
                             </span>
 
                             <div
                               className="w-[300px] h-[80px] mx-[2vw] rounded-[50px] bg-cover bg-center flex-shrink-0"
-                              style={{ backgroundImage: `url(${image})` }}
+                              style={{
+                                backgroundImage: `url(${image})`
+                              }}
                             />
+
                           </div>
                         );
                       })}
                   </>
+
                 )}
-            </div>
-          ))}
+
+              </div>
+            ))}
         </div>
       </div>
     </div>
   );
 };
 
+
 const FullScreenNav = () => {
+
   const navRef = useRef(null);
+
   const { menuOpen, setMenuOpen } = useContext(MenuContext);
   const { navColor } = useContext(NavColorContext);
   const { skipTransition, setSkipTransition } = useContext(Transition);
+
   const navigate = useNavigate();
+
   const tl = useRef(null);
 
-  useGSAP(() => {
-    if (menuOpen) {
-      gsap.set('.fullscreennav', { display: 'block' });
 
-      if (tl.current) tl.current.kill();
+  useGSAP(() => {
+
+    if (menuOpen) {
+
+      gsap.set('.fullscreennav', {
+        display: 'block'
+      });
+
+      if (tl.current) {
+        tl.current.kill();
+      }
 
       tl.current = gsap.timeline();
 
       tl.current
-        .fromTo('.stairring',
+
+        .fromTo(
+          '.stairring',
           { height: 0 },
-          { height: '100%', stagger: { amount: -0.3 }, duration: 0.5 }
+          {
+            height: '100%',
+            stagger: {
+              amount: -0.3
+            },
+            duration: 0.5
+          }
         )
-        .fromTo('.link',
-          { opacity: 0, rotateX: 90 },
-          { opacity: 1, rotateX: 0, stagger: { amount: 0.2 }, duration: 0.4 },
+
+        .fromTo(
+          '.link',
+          {
+            opacity: 0,
+            rotateX: 90
+          },
+          {
+            opacity: 1,
+            rotateX: 0,
+            stagger: {
+              amount: 0.2
+            },
+            duration: 0.4
+          },
           '-=0.1'
         )
-        .fromTo('.navlink',
-          { opacity: 0 },
-          { opacity: 1, duration: 0.3 }
+
+        .fromTo(
+          '.navlink',
+          {
+            opacity: 0
+          },
+          {
+            opacity: 1,
+            duration: 0.3
+          }
         )
+
         .fromTo(
           '.clock',
-          { opacity: 0, y: 50 },
-          { opacity: 1, y: 0, duration: 0.5 },
+          {
+            opacity: 0,
+            y: 50
+          },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.5
+          },
           '-=0.2'
         )
+
         .fromTo(
           '.social',
-          { opacity: 0, y: 50 },
-          { opacity: 1, y: 0, duration: 0.5 },
+          {
+            opacity: 0,
+            y: 50
+          },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.5
+          },
           '-=0.2'
         );
 
     } else {
+
       if (tl.current) {
+
         tl.current.reverse();
+
         function hideMenu() {
-          gsap.set('.fullscreennav', { display: 'none', duration: 0.4 });
+          gsap.set('.fullscreennav', {
+            display: 'none',
+            duration: 0.4
+          });
         }
-        tl.current.eventCallback('onReverseComplete', hideMenu);
+
+        tl.current.eventCallback(
+          'onReverseComplete',
+          hideMenu
+        );
+
       } else {
-        gsap.set('.fullscreennav', { display: 'none' });
+
+        gsap.set('.fullscreennav', {
+          display: 'none'
+        });
+
       }
     }
+
   }, [menuOpen]);
 
+
   return (
+
     <div
       ref={navRef}
       id='fullscreennav'
-      className="fullscreennav text-white h-screen w-full overflow-hidden fixed inset-0 z-50 "
+      className="fullscreennav text-white h-screen w-full overflow-hidden fixed inset-0 z-50"
     >
+
       <div className="fixed top-0 left-0 h-screen w-screen">
+
         <div className='h-full w-full flex'>
+
           <div className="stairring flex-1 -mr-[1px] bg-[#000016]"></div>
           <div className="stairring flex-1 -mr-[1px] bg-[#000016]"></div>
           <div className="stairring flex-1 -mr-[1px] bg-[#000016]"></div>
           <div className="stairring flex-1 -mr-[1px] bg-[#000016]"></div>
           <div className="stairring flex-1 -mr-[1px] bg-[#000016]"></div>
+
         </div>
+
       </div>
 
-      <div className='navlink relative flex w-full justify-between items-start  p-5'>
+
+      <div className='navlink relative flex w-full justify-between items-start p-5'>
+
         <div className="relative inline-block z-[100] cursor-target">
+
           <img
             src={navColor === "white" ? logowhite : logowhite}
             alt="Varun Logo"
@@ -355,21 +652,31 @@ const FullScreenNav = () => {
               setSkipTransition(true);
               setMenuOpen(false);
             }}
-
           />
+
         </div>
+
 
         <div
           onClick={() => setMenuOpen(false)}
-          className="group h-12 w-12 sm:h-14 sm:w-14 md:h-17 md:w-17 relative cursor-pointer hover:bg-[#000016] cursor-target "
+          className="group h-12 w-12 sm:h-14 sm:w-14 md:h-17 md:w-17 relative cursor-pointer hover:bg-[#000016] cursor-target"
         >
+
           <div className="h-16 sm:h-20 md:h-24 w-[2px] absolute -rotate-45 origin-top bg-white group-hover:bg-[#D3FD50]"></div>
+
           <div className="h-16 sm:h-20 md:h-24 w-[2px] absolute right-0 rotate-45 origin-top bg-white group-hover:bg-[#D3FD50]"></div>
+
         </div>
+
       </div>
+
+
       <div className='py-30 md:py-40 lg:py-8'>
-        <div className="h-full flex flex-col ">
+
+        <div className="h-full flex flex-col">
+
           <div className="flex-1 overflow-hidden">
+
 
             {/* Home - Fast marquee */}
             <HoverMenuItem
@@ -384,10 +691,13 @@ const FullScreenNav = () => {
               speed={1.5}
               isHome={true}
             >
-              <h1 className="font-[font5] md:text-[7vw] text-[14vw] uppercase text-center tracking-tight leading-none">
-                Home 🕸️
+
+              <h1 className="font-[font5] md:text-[7vw] text-[14vw] uppercase text-center tracking-tight leading-none flex items-center justify-center gap-3">
+                Home <span className="text-[0.7em]">🕸️</span>
               </h1>
+
             </HoverMenuItem>
+
 
             {/* Projects - With ❊ icons */}
             <HoverMenuItem
@@ -406,10 +716,13 @@ const FullScreenNav = () => {
                 "https://res.cloudinary.com/dgxnwlg0w/image/upload/v1781453662/Project1photo_h5qcnc.png"
               ]}
             >
-              <h1 className="font-[font5] md:text-[7vw] text-[14vw] uppercase text-center tracking-tight leading-none">
-               🕸️ Projects
+
+              <h1 className="font-[font5] md:text-[7vw] text-[14vw] uppercase text-center tracking-tight leading-none flex items-center justify-center gap-3">
+                <span className="text-[0.7em]">🕸️</span> Projects
               </h1>
+
             </HoverMenuItem>
+
 
             {/* About Me - With ◈ diamond and images */}
             <HoverMenuItem
@@ -424,10 +737,13 @@ const FullScreenNav = () => {
               speed={12}
               isAbout={true}
             >
-              <h1 className="font-[font5] md:text-[7vw] text-[14vw] uppercase text-center tracking-tight leading-none">
-                about 🕸️
+
+              <h1 className="font-[font5] md:text-[7vw] text-[14vw] uppercase text-center tracking-tight leading-none flex items-center justify-center gap-3">
+                About <span className="text-[0.7em]">🕸️</span>
               </h1>
+
             </HoverMenuItem>
+
 
             {/* Contact - With Direction Based Hover - FASTER */}
             <HoverMenuItem
@@ -442,21 +758,31 @@ const FullScreenNav = () => {
               isContact={true}
               speed={7}
             >
-              <h1 className="font-[font5] md:text-[7vw] text-[14vw] uppercase text-center tracking-tight leading-none">
-              🕸️ Contact 
+
+              <h1 className="font-[font5] md:text-[7vw] text-[14vw] uppercase text-center tracking-tight leading-none flex items-center justify-center gap-3">
+                <span className="text-[0.7em]">🕸️</span> Contact
               </h1>
+
             </HoverMenuItem>
 
+
           </div>
+
         </div>
+
       </div>
 
-      <footer className="relative px-4 sm:px-6 pb-8  pt-2">
+
+      <footer className="relative px-4 sm:px-6 pb-8 pt-2">
+
         <div className="clock absolute left-0 bottom-2 hidden md:block">
           <Clock />
         </div>
 
+
+        {/* Desktop Footer Links */}
         <div className="hidden md:flex items-center justify-center gap-10 pb-1 md:pb-20 lg:pb-1">
+
           <FlipLink
             href="/privacy-policy"
             onClick={(e) => {
@@ -470,6 +796,7 @@ const FullScreenNav = () => {
             Privacy Policy
           </FlipLink>
 
+
           <FlipLink
             href="/terms"
             onClick={(e) => {
@@ -482,72 +809,151 @@ const FullScreenNav = () => {
           >
             Terms of Service
           </FlipLink>
+
         </div>
 
-        <div className="social  hidden md:flex items-center gap-5 absolute right-10 bottom-2 ">
-          <a href="https://github.com/varuntyagii" target="_blank" rel="noopener noreferrer" className="text-2xl  hover:text-[#181717] hover:bg-white rounded-full transition-colors duration-300">
+
+        {/* Desktop Social Icons */}
+        <div className="social hidden md:flex items-center gap-5 absolute right-10 bottom-2">
+
+          <a
+            href="https://github.com/varuntyagii"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-2xl hover:text-[#181717] hover:bg-white rounded-full transition-colors duration-300"
+          >
             <FaGithub />
           </a>
-          <a href="https://instagram.com/varuntya9i" target="_blank" rel="noopener noreferrer" className="text-2xl hover:text-[#E4405F] transition-colors duration-300">
+
+          <a
+            href="https://instagram.com/varuntya9i"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-2xl hover:text-[#E4405F] transition-colors duration-300"
+          >
             <FaInstagram />
           </a>
-          <a href="https://x.com/varuntya9i" target="_blank" rel="noopener noreferrer" className="text-2xl hover:bg-white hover:text-[#000000] transition-colors duration-300">
+
+          <a
+            href="https://x.com/varuntya9i"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-2xl hover:bg-white hover:text-[#000000] transition-colors duration-300"
+          >
             <FaXTwitter />
           </a>
-          <a href="https://linkedin.com/in/varuntyagi09" target="_blank" rel="noopener noreferrer" className="text-2xl hover:text-[#0A66C2] transition-colors duration-300">
+
+          <a
+            href="https://linkedin.com/in/varuntyagi09"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-2xl hover:text-[#0A66C2] transition-colors duration-300"
+          >
             <FaLinkedin />
           </a>
-          <a href="https://www.twitch.tv/varuntyagii" target="_blank" rel="noopener noreferrer" className="text-2xl hover:text-[#9146FF] transition-colors duration-300">
+
+          <a
+            href="https://www.twitch.tv/varuntyagii"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-2xl hover:text-[#9146FF] transition-colors duration-300"
+          >
             <FaTwitch />
           </a>
+
         </div>
 
-        <div className="md:hidden flex flex-col items-center justify-center gap-7 -mt-17  pb-1 text-center">
-          <FlipLink
-            href="/privacy-policy"
-            onClick={(e) => {
-              e.preventDefault();
-              setSkipTransition(true);
-              setMenuOpen(false);
-              navigate("/privacy-policy");
-            }}
-            className="social text-[18px] uppercase tracking-[0.2em] opacity-60"
-          >
-            Privacy Policy
-          </FlipLink>
 
-          <FlipLink
-            href="/terms"
-            onClick={(e) => {
-              e.preventDefault();
-              setSkipTransition(true);
-              setMenuOpen(false);
-              navigate("/terms");
-            }}
-            className="social text-[18px] uppercase tracking-[0.2em] opacity-60"
-          >
-            Terms of Service
-          </FlipLink>
+        {/* Mobile Footer */}
+        {/* Mobile Footer */}
+<div className="md:hidden flex flex-col items-center justify-center gap-7 sm:gap-5 -mt-2 pb-1 text-center">
 
-          <div className="social flex items-center justify-center gap-9 text-4xl pt-6">
-            <a href="https://github.com/varuntyagii" target="_blank" rel="noopener noreferrer" className="hover:text-[#181717] hover:bg-white rounded-full transition-colors duration-300">
-              <FaGithub className="text-3xl sm:text-4xl" />
-            </a>
-            <a href="https://instagram.com/varuntya9i" target="_blank" rel="noopener noreferrer" className="hover:text-[#E4405F] transition-colors duration-300">
-              <FaInstagram className="text-3xl sm:text-4xl" />
-            </a>
-            <a href="https://x.com/varuntya9i" target="_blank" rel="noopener noreferrer" className="hover:text-[#000000] hover:bg-white transition-colors duration-300">
-              <FaXTwitter className="text-3xl sm:text-4xl" />
-            </a>
-            <a href="https://linkedin.com/in/varuntyagi09" target="_blank" rel="noopener noreferrer" className="hover:text-[#0A66C2] transition-colors duration-300">
-              <FaLinkedin className="text-3xl sm:text-4xl" />
-            </a>
-            <a href="https://www.twitch.tv/varuntyagii" target="_blank" rel="noopener noreferrer" className="hover:text-[#9146FF] transition-colors duration-300">
-              <FaTwitch className="text-3xl sm:text-4xl" />
-            </a>
-          </div>
-        </div>
+  {/* Privacy + Terms */}
+  <div className="flex flex-col sm:flex-row items-center justify-center gap-7 sm:gap-8">
+
+    <FlipLink
+      href="/privacy-policy"
+      onClick={(e) => {
+        e.preventDefault();
+        setSkipTransition(true);
+        setMenuOpen(false);
+        navigate("/privacy-policy");
+      }}
+      className="social text-[15px] uppercase tracking-[0.2em] opacity-60"
+    >
+      Privacy Policy
+    </FlipLink>
+
+    <FlipLink
+      href="/terms"
+      onClick={(e) => {
+        e.preventDefault();
+        setSkipTransition(true);
+        setMenuOpen(false);
+        navigate("/terms");
+      }}
+      className="social text-[15px] uppercase tracking-[0.2em] opacity-60"
+    >
+      Terms of Service
+    </FlipLink>
+
+  </div>
+
+
+  {/* Mobile Social Icons */}
+  <div className="social flex items-center justify-center gap-7 sm:gap-9 pt-6 sm:pt-1">
+
+    <a
+      href="https://github.com/varuntyagii"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-2xl sm:text-3xl hover:text-[#181717] hover:bg-white rounded-full transition-colors duration-300"
+    >
+      <FaGithub />
+    </a>
+
+    <a
+      href="https://instagram.com/varuntya9i"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-2xl sm:text-3xl hover:text-[#E4405F] transition-colors duration-300"
+    >
+      <FaInstagram />
+    </a>
+
+    <a
+      href="https://x.com/varuntya9i"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-2xl sm:text-3xl hover:bg-white hover:text-[#000000] transition-colors duration-300"
+    >
+      <FaXTwitter />
+    </a>
+
+    <a
+      href="https://linkedin.com/in/varuntyagi09"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-2xl sm:text-3xl hover:text-[#0A66C2] transition-colors duration-300"
+    >
+      <FaLinkedin />
+    </a>
+
+    <a
+      href="https://www.twitch.tv/varuntyagii"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-2xl sm:text-3xl hover:text-[#9146FF] transition-colors duration-300"
+    >
+      <FaTwitch />
+    </a>
+
+  </div>
+
+</div>
+
       </footer>
+
     </div>
   )
 }
