@@ -45,11 +45,11 @@ const AboutPhotosChange = () => {
       </div>
 
       {/* Slider Section with Overlay Text */}
-      <div className="relative w-full max-w-7xl mx-auto">
-        <div className="cursor-target absolute font-[font2] -top-3 sm:-top-6 md:left-79 left-63  mix-blend-difference text-white italic text-xl sm:text-3xl md:text-5xl z-20 pointer-events-none">
+      <div className="relative w-full max-w-lg mx-auto">
+        <div className="cursor-target absolute font-[font2] -top-5 sm:-top-8 -left-2 sm:-left-6 mix-blend-difference text-white italic text-2xl sm:text-4xl md:text-5xl z-20 pointer-events-none">
           portfolio
         </div>
-        <div className="cursor-target absolute font-[font2] -bottom-3 sm:-bottom-4 md:right-80 mix-blend-difference text-red-500 italic text-3xl sm:text-4xl md:text-6xl z-20 pointer-events-none">
+        <div className="cursor-target absolute font-[font2] -bottom-5 sm:-bottom-8 -right-2 sm:-right-6 mix-blend-difference text-[#C87F7A] italic text-3xl sm:text-5xl md:text-6xl z-20 pointer-events-none">
           2026
         </div>
         <div className="relative z-10 w-full">
