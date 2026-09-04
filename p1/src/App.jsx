@@ -65,7 +65,7 @@ const App = () => {
   }, [location.pathname]);
 
   return (
-    <div className="overflow-x-clip">
+    <div className="overflow-x-hidden">
 
       {!navHovered && (
         <TargetCursor

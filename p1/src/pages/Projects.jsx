@@ -10,41 +10,23 @@ import { projectImages } from "../data/projectImages";
 gsap.registerPlugin(ScrollTrigger);
 
 const Projects = () => {
-  useGSAP(() => {
-  const mm = gsap.matchMedia();
-
-  mm.add("(min-width: 1024px)", () => {
-    const cards = gsap.utils.toArray(".hero");
-
-    gsap.fromTo(
-      cards,
-      {
-        height: "100px",
-        opacity: 0,
-        scale: 0.94,
+   useGSAP(function () {
+    gsap.from(".hero", {
+      height: "100px",
+      opacity: 0,
+      scale: 0.94,
+      ease: "power2.out",
+      stagger: {
+        amount: 0.3,
       },
-      {
-        height: "55vh",
-        opacity: 1,
-        scale: 1,
-        ease: "power2.out",
-        stagger: {
-          amount: 0.3,
-        },
-        scrollTrigger: {
-          trigger: ".lol",
-          start: "top 100%",
-          end: "top -150%",
-          scrub: true,
-        },
-      }
-    );
+      scrollTrigger: {
+        trigger: ".lol",
+        start: "top 100%",
+        end: "top -150%",
+        scrub: true,
+      },
+    });
   });
-
-  ScrollTrigger.refresh();
-
-  return () => mm.revert();
-});
 
   return (
     <div className="w-full overflow-hidden">
