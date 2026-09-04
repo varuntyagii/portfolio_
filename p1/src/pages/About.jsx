@@ -63,55 +63,59 @@ const About = () => {
   return (
     // overflow-hidden REMOVED from here — it was breaking position:sticky
     // for every descendant on the page, including Education's pin.
-    <div ref={aboutRef} className='bg-[#C8C2CF] text-black min-h-screen '>
-      <div className='section1 py-1 overflow-hidden'>
+    <div ref={aboutRef} className='bg-[#C8C2CF] text-black min-h-screen select-none'>
+      <div className='section1 py-1 overflow-hidden relative'>
         <div 
           ref={imgDiv}
           className='
             h-[45vw] w-[35vw]
+            max-h-[260px] max-w-[200px]
+            md:max-h-none md:max-w-none
             md:h-[20vw] md:w-[15vw]
             rounded-2xl
             absolute
-            top-10 md:top-20
+            top-8 md:top-20
             left-1/2 -translate-x-1/2
             md:left-[24vw] md:translate-x-0
             overflow-hidden
-            
+            border-2 border-white/60
+            shadow-[0_20px_50px_rgba(0,0,0,0.25)]
+            z-10
           '
         >
           <img
             ref={imgRef}
             src={imageArray[0]}
-            alt=""
+            alt="Varun Tyagi"
             className='object-cover object-[center_25%] rounded-2xl h-full w-full'
           />
-        </div >
+        </div>
 
         <div className='relative font-[font6] z-1 overflow-hidden'>
-          <div className='mt-[35vh] md:mt-[50vh]'>
+          <div className='mt-[35vh] sm:mt-[40vh] md:mt-[48vh]'>
             <h1 className='flex flex-col items-center uppercase text-center'>
 
               {/* Main Name - VARUN TYAGI */}
-              <div className="heading text-[20vw] md:text-[18vw] tracking-[-0.4vw] leading-[20vw] md:leading-[17vw] flex items-center justify-center flex-wrap">
+              <div className="heading text-[clamp(2.8rem,16vw,14rem)] tracking-tight leading-[0.92] flex items-center justify-center flex-wrap">
 
-                <span className="text-white">
+                <span className="text-white font-black">
                   VA
                 </span>
 
-                <span className="relative z-10 bg-[linear-gradient(90deg,#ffffff_50%,#000000_50%)] bg-clip-text text-transparent">
+                <span className="relative z-10 bg-[linear-gradient(90deg,#ffffff_50%,#000000_50%)] bg-clip-text text-transparent font-black">
                   RUN
                 </span>
 
-                <span className="text-white">
+                <span className="text-white font-black ml-2 sm:ml-4">
                   TYAGI
                 </span>
 
               </div>
 
               {/* Subtitle - DEVELOPER */}
-              <div className="overflow-hidden mt-[-2vw] md:mt-[-1vw]  ">
+              <div className="overflow-hidden mt-[-1vw] md:mt-[-0.5vw]">
 
-                <div className='heading1 text-[18vw] md:text-[6vw] font-bold tracking-[0.2vw] flex items-center justify-center flex-wrap'>
+                <div className='heading1 text-[clamp(2.2rem,12vw,6.5rem)] font-extrabold tracking-wide flex items-center justify-center flex-wrap'>
 
                   <span className="relative z-10 bg-[linear-gradient(90deg,#ffffff_50%,#000000_50%)] bg-clip-text text-transparent">
                     DEV
@@ -120,7 +124,7 @@ const About = () => {
                   <span className="text-white/90">
                     ELOPER
                   </span>
-                  <span className="text-white/30 text-[8vw] md:text-[3vw] ml-1">
+                  <span className="text-[#C87F7A] text-[clamp(2rem,8vw,5rem)] ml-1">
                     .
                   </span>
 
@@ -131,31 +135,28 @@ const About = () => {
             </h1>
           </div>
 
-          <div className=" w-full flex justify-center md:justify-end mt-16 md:mt-28 px-4">
+          <div className="w-full flex justify-center md:justify-end mt-12 md:mt-24 px-4 sm:px-6">
             <div className="w-full md:w-[65vw] lg:w-[55vw] md:mr-10">
 
-              <p className="text-center md:text-right text-[4vw] sm:text-base md:text-xl lg:text-2xl font-light text-black/60 leading-[1.8] md:leading-[2.2] tracking-wide">
+              <p className="text-center md:text-right text-[15px] sm:text-lg md:text-xl lg:text-2xl font-light text-black/75 leading-[1.8] md:leading-[2.2] tracking-wide">
 
-                <span className="text-black font-medium relative cursor-target">
+                <span className="text-black font-semibold relative cursor-target">
                   I'm driven by curiosity
-                  <span className="absolute -bottom-2 left-0 w-8 md:w-12 h-[0.15vw] bg-black/30 rounded-full"></span>
+                  <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-black/30 rounded-full"></span>
                 </span>
-                {' '}and the challenge of building things that matter.  Whether it's a
+                {' '}and the challenge of building things that matter. Whether it's a{' '}
 
-                <br className="hidden md:block" />
+                <span className="cursor-target text-black font-semibold border-b-2 border-black/30 pb-0.5 hover:border-black transition-all duration-300">
+                  "full-stack application"
+                </span>{' '}
 
-
-                <span className="cursor-target text-black font-semibold border-b-2 border-black/20 pb-1 hover:border-black transition-all duration-300">
-                  "        full-stack application
-                  "      </span>
-
-                or a new idea waiting to be explored, I focus on creating software that is
-                <span className="relative inline-block font-bold group cursor-pointer ml-2 ">
-                  <span className="relative z-10 cursor-target ">
+                or a new idea waiting to be explored, I focus on creating software that is{' '}
+                <span className="relative inline-block font-bold group cursor-pointer">
+                  <span className="relative z-10 cursor-target text-black">
                     practical, scalable, and user-focused
                   </span>
 
-                  <span className="absolute left-0 bottom-0 h-full w-full bg-[#C87F7A] -z-0 origin-left scale-x-0 transition-transform duration-500 ease-out group-hover:scale-x-100"></span>
+                  <span className="absolute left-0 bottom-0 h-full w-full bg-[#C87F7A]/40 -z-0 origin-left scale-x-0 transition-transform duration-500 ease-out group-hover:scale-x-100"></span>
                 </span>
                 .
 
@@ -165,45 +166,45 @@ const About = () => {
                 <span className="text-black font-semibold cursor-target">
                   {' '}it's about solving problems
                 </span>
-                {' '}and delivering
-                <span className="text-black cursor-target font-bold relative inline-block group ml-2">
-                  " meaningful experiences "
-                  <span className="absolute -bottom-1 left-0 w-0 group-hover:w-full h-[0.15vw] bg-black transition-all duration-700 ease-in-out"></span>
+                {' '}and delivering{' '}
+                <span className="text-black cursor-target font-bold relative inline-block group">
+                  "meaningful experiences"
+                  <span className="absolute -bottom-1 left-0 w-0 group-hover:w-full h-[2px] bg-black transition-all duration-700 ease-in-out"></span>
                 </span>
                 .
               </p>
 
               {/* Stats */}
-              <div className="flex flex-wrap items-center justify-center md:justify-end gap-4 md:gap-6 mt-6 md:mt-8">
+              <div className="flex flex-wrap items-center justify-center md:justify-end gap-5 md:gap-8 mt-8 md:mt-10">
                 <div className="text-center md:text-right">
-                  <span className="block text-black font-bold text-[3vw] md:text-[1.2vw]">1+</span>
-                  <span className="text-black/30 text-[2vw] md:text-[0.7vw] tracking-wider">YEARS EXP</span>
+                  <span className="block text-black font-bold font-[font5] text-2xl sm:text-3xl md:text-4xl">1+</span>
+                  <span className="text-black/50 text-[10px] sm:text-xs tracking-widest font-mono">YEARS EXP</span>
                 </div>
-                <div className="w-[0.1vw] h-6 bg-black/10 hidden md:block"></div>
+                <div className="w-px h-8 bg-black/15 hidden md:block"></div>
                 <div className="text-center md:text-right">
-                  <span className="block text-black font-bold text-[3vw] md:text-[1.2vw]">10+</span>
-                  <span className="text-black/30 text-[2vw] md:text-[0.7vw] tracking-wider">PROJECTS</span>
+                  <span className="block text-black font-bold font-[font5] text-2xl sm:text-3xl md:text-4xl">10+</span>
+                  <span className="text-black/50 text-[10px] sm:text-xs tracking-widest font-mono">PROJECTS</span>
                 </div>
-                <div className="w-[0.1vw] h-6 bg-black/10 hidden md:block"></div>
+                <div className="w-px h-8 bg-black/15 hidden md:block"></div>
                 <div className="text-center md:text-right">
-                  <span className="block text-black font-bold text-[3vw] md:text-[1.2vw]">100%</span>
-                  <span className="text-black/30 text-[2vw] md:text-[0.7vw] tracking-wider">COMMITMENT</span>
+                  <span className="block text-black font-bold font-[font5] text-2xl sm:text-3xl md:text-4xl">100%</span>
+                  <span className="text-black/50 text-[10px] sm:text-xs tracking-widest font-mono">COMMITMENT</span>
                 </div>
               </div>
 
               {/* Signature Line */}
-              <div className="flex items-center justify-center md:justify-end gap-2 md:gap-3 mt-4 md:mt-6">
-                <div className="w-6 md:w-12 h-[0.05vw] bg-gradient-to-l from-black/30 to-transparent"></div>
-                <span className="text-black/20 text-[1.8vw] md:text-[0.7vw]">✦</span>
-                <span className="text-black/35 text-[2vw] md:text-[0.7vw] tracking-[0.4em] font-light uppercase">
+              <div className="flex items-center justify-center md:justify-end gap-3 mt-6">
+                <div className="w-8 md:w-16 h-px bg-gradient-to-l from-black/40 to-transparent"></div>
+                <span className="text-[#C87F7A] text-xs">✦</span>
+                <span className="text-black/50 text-xs sm:text-sm tracking-[0.3em] font-light uppercase font-[font9]">
                   Builder
                 </span>
-                <span className="text-black/20 text-[1.8vw] md:text-[0.7vw]">✦</span>
-                <span className="text-black/35 text-[2vw] md:text-[0.7vw] tracking-[0.4em] font-light uppercase">
+                <span className="text-[#C87F7A] text-xs">✦</span>
+                <span className="text-black/50 text-xs sm:text-sm tracking-[0.3em] font-light uppercase font-[font9]">
                   Creator
                 </span>
-                <span className="text-black/20 text-[1.8vw] md:text-[0.7vw]">✦</span>
-                <div className="w-6 md:w-12 h-[0.05vw] bg-gradient-to-r from-black/30 to-transparent"></div>
+                <span className="text-[#C87F7A] text-xs">✦</span>
+                <div className="w-8 md:w-16 h-px bg-gradient-to-r from-black/40 to-transparent"></div>
               </div>
 
             </div>

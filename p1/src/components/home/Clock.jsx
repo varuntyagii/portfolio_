@@ -1,54 +1,40 @@
-import React, { useEffect, useState } from 'react'
-import { FaGlobe } from "react-icons/fa";
+import React, { useEffect, useState } from 'react';
+import { FaGlobeAsia } from 'react-icons/fa';
 
+const Clock = ({ className = '' }) => {
+  const [time, setTime] = useState('');
 
-const Clock = ({className}) => {
-    const [clock, setClock] = useState(Date.now());
-    useEffect(()=>{
-        const timer = setInterval(()=>{
-             setClock(Date.now());
-            // console.log(Date.now());
-        }, 1000)
-        return ()=> clearInterval(timer);
-    }, []);
-//   return (
-//  <div className="flex justify-start w-full items-start px-2">
+  useEffect(() => {
+    const updateTime = () => {
+      const now = new Date();
+      const istString = now.toLocaleTimeString('en-US', {
+        timeZone: 'Asia/Kolkata',
+        hour12: true,
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+      });
+      setTime(istString);
+    };
 
-//   {/* LEFT SIDE */}
-//   <div className="text-[4vw] flex gap-3.5 ml-3 md:text-[1.5vw]">
-//     <FaGlobe />
-//     <span>INDIA_{new Date(clock).toLocaleTimeString()}</span>
-//   </div>
+    updateTime();
+    const interval = setInterval(updateTime, 1000);
+    return () => clearInterval(interval);
+  }, []);
 
-//  {/* <div className="font-[font3] text-right text-neutral-300 max-w-[50%] px-3">
-//     <div className="text-xs sm:text-sm md:text-[1.1vw]">
-//       I’m a Full Stack Developer
-//     </div>
-//     <div className="text-xs sm:text-sm md:text-[1.1vw]">
-//       focused on building clean, scalable,
-//     </div>
-//     <div className="text-xs sm:text-sm md:text-[1.1vw]">
-//       and intentional web applications.
-//     </div>
-//     <div className="text-xs sm:text-sm md:text-[1.1vw]">
-//       I prioritize clarity, usability, and long-term impact over complexity.
-//     </div>
-//   </div> */}
-
-// </div>
-//   )
-
-return (
-  <div  className="className flex flex-col justify-end w-full px-2">
-
-       <div className="text-[4vw] mix-blend-difference  flex gap-3.5 ml-3 md:text-[1.5vw] items-center mt-auto">
-      <FaGlobe />
-      <span>INDIA_{new Date(clock).toLocaleTimeString()}</span>
+  return (
+    <div className={`inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md text-zinc-300 ${className}`}>
+      <span className="relative flex h-2 w-2">
+        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#D3FD50] opacity-75"></span>
+        <span className="relative inline-flex rounded-full h-2 w-2 bg-[#D3FD50]"></span>
+      </span>
+      <FaGlobeAsia className="text-zinc-400 text-xs sm:text-sm" />
+      <span className="font-[font9] text-[11px] sm:text-xs uppercase tracking-[0.14em]">
+        IND • {time || '12:00:00 PM'} IST
+      </span>
     </div>
+  );
+};
 
-  </div>
-)
-}
-
-export default Clock
+export default Clock;
 

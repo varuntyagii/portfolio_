@@ -32,9 +32,9 @@ const AboutPhotosChange = () => {
       </div>
 
       {/* Achievements Section */}
-     
+
       {/* Achievements Section */}
-     
+
       {/* Divider */}
       <div className="flex items-center w-full max-w-7xl mx-auto text-white px-2 mt-12 mb-8 md:mt-3 md:mb-20">
         <div className="flex-1 h-[0.2px] bg-black"></div>

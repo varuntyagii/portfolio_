@@ -1,3 +1,4 @@
+// ScrambledText.jsx - Updated
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { SplitText } from 'gsap/SplitText';
@@ -20,10 +21,10 @@ const ScrambledText = ({
     if (!rootRef.current) return;
 
     const split = SplitText.create(rootRef.current.querySelector('p'), {
-        type: 'words,chars',
-        wordsClass: 'word',
-        charsClass: 'char'
-        });
+      type: 'words,chars',
+      wordsClass: 'word',
+      charsClass: 'char'
+    });
 
     split.chars.forEach(el => {
       const c = el;
@@ -65,10 +66,12 @@ const ScrambledText = ({
   return (
     <div
       ref={rootRef}
-      className={`m-[7vw] max-w-[800px] font-mono  text-[clamp(14px,4vw,32px)] mixd  ${className}`}
+      className={`w-full ${className}`}
       style={style}
     >
-      <p>{children}</p>
+      <p className="text-[clamp(10px,3vw,16px)] sm:text-[clamp(12px,2.5vw,18px)] md:text-[clamp(14px,2vw,20px)]">
+        {children}
+      </p>
     </div>
   );
 };
