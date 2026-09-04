@@ -203,8 +203,8 @@ const project = projectImages
     }, containerRef);
 
     return () => {
-      ctx.revert();
-      ScrollTrigger.getAll().forEach(st => st.kill());
+      // ctx.revert();
+      // ScrollTrigger.getAll().forEach(st => st.kill());
     };
   }, [project, setHoveredTitle, setHoveredYear, isLowEnd]);
 
